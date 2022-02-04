@@ -22,8 +22,11 @@ jobs:
         python-version: ${{ matrix.python }}
     - name: Install dependencies
       run: |
+        apt-get -y install graphviz
         python -m pip install --upgrade pip
         pip install -e .
+        pip install -r requirements.txt
+        pip install -r requirements_dev.txt
         pip install -r requirements_test.txt
     - name: Lint with pre-commit
       run: |
@@ -49,7 +52,6 @@ jobs:
               ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && export DEBIAN_FRONTEND=noninteractive && apt-get install -y tzdata && dpkg-reconfigure --frontend noninteractive tzdata && \
               apt-get -y install software-properties-common && add-apt-repository ppa:deadsnakes/ppa && apt-get -y update && \
               apt install -y python3.7-venv && python3.7 -m venv venv37 && source venv37/bin/activate && \
-              git checkout b322f3f2dbba3e888b3906c389e730e535e463e2 && \
               python3.7 -m pip install --upgrade pip && \
               python3.7 --version && \
               uname -m && \
@@ -58,11 +60,10 @@ jobs:
               ls && \
               apt-get -y install graphviz && \
               python3.7 -m pip install --upgrade pip && \
+              python3.7 -m pip install -e . && \
               python3.7 -m pip install -r requirements.txt && \
               python3.7 -m pip install -r requirements_dev.txt && \
               python3.7 -m pip install -r requirements_test.txt && \
-              make install && \
-              python3.7 -m pip install -e . && \
               python3.7 -m pytest -p no:spark -m "not spark_test" && \
               deactivate'
 
@@ -83,7 +84,6 @@ jobs:
               ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && export DEBIAN_FRONTEND=noninteractive && apt-get install -y tzdata && dpkg-reconfigure --frontend noninteractive tzdata && \
               python3 -m pip install virtualenv && python3 -m venv py38-venv && \
               source py38-venv/bin/activate && \
-              git checkout b322f3f2dbba3e888b3906c389e730e535e463e2 && \
               python3 -m pip install --upgrade pip && \
               python3 --version && \
               uname -m && \
@@ -92,10 +92,9 @@ jobs:
               ls && \
               apt-get -y install graphviz && \
               python3 -m pip install --upgrade pip && \
+              python3 -m pip install -e . && \
               python3 -m pip install -r requirements.txt && \
               python3 -m pip install -r requirements_dev.txt && \
               python3 -m pip install -r requirements_test.txt && \
-              make install && \
-              python3 -m pip install -e . && \
               python3 -m pytest -p no:spark -m "not spark_test" && \
               deactivate'
