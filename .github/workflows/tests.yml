@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        python: [3.6, 3.7, 3.8]
+        python: [3.7, 3.8]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -22,6 +22,7 @@ jobs:
         python-version: ${{ matrix.python }}
     - name: Install dependencies
       run: |
+        git checkout b322f3f2dbba3e888b3906c389e730e535e463e2
         python -m pip install --upgrade pip
         pip install -e .
         pip install -r requirements_test.txt
@@ -49,6 +50,7 @@ jobs:
               ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && export DEBIAN_FRONTEND=noninteractive && apt-get install -y tzdata && dpkg-reconfigure --frontend noninteractive tzdata && \
               apt-get -y install software-properties-common && add-apt-repository ppa:deadsnakes/ppa && apt-get -y update && \
               apt install -y python3.7-venv && python3.7 -m venv venv37 && source venv37/bin/activate && \
+              git checkout b322f3f2dbba3e888b3906c389e730e535e463e2 && \
               python3.7 -m pip install --upgrade pip && \
               python3.7 --version && \
               uname -m && \
@@ -82,6 +84,7 @@ jobs:
               ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime && export DEBIAN_FRONTEND=noninteractive && apt-get install -y tzdata && dpkg-reconfigure --frontend noninteractive tzdata && \
               python3 -m pip install virtualenv && python3 -m venv py38-venv && \
               source py38-venv/bin/activate && \
+              git checkout b322f3f2dbba3e888b3906c389e730e535e463e2 && \
               python3 -m pip install --upgrade pip && \
               python3 --version && \
               uname -m && \
