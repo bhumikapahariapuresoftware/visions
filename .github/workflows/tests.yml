@@ -31,4 +31,3 @@ jobs:
     - name: Test with pytest
       run: |
         pytest -p no:spark -m "not spark_test"
-        
