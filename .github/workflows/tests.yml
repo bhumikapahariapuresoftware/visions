@@ -22,11 +22,8 @@ jobs:
         python-version: ${{ matrix.python }}
     - name: Install dependencies
       run: |
-        sudo apt-get -y install graphviz
         python -m pip install --upgrade pip
         pip install -e .
-        pip install -r requirements.txt
-        pip install -r requirements_dev.txt
         pip install -r requirements_test.txt
     - name: Lint with pre-commit
       run: |
@@ -58,11 +55,8 @@ jobs:
               whoami && \
               pwd && \
               ls && \
-              apt-get -y install graphviz && \
               python3.7 -m pip install --upgrade pip && \
               python3.7 -m pip install -e . && \
-              python3.7 -m pip install -r requirements.txt && \
-              python3.7 -m pip install -r requirements_dev.txt && \
               python3.7 -m pip install -r requirements_test.txt && \
               python3.7 -m pytest -p no:spark -m "not spark_test" && \
               deactivate'
@@ -90,11 +84,8 @@ jobs:
               whoami && \
               pwd && \
               ls && \
-              apt-get -y install graphviz && \
               python3 -m pip install --upgrade pip && \
               python3 -m pip install -e . && \
-              python3 -m pip install -r requirements.txt && \
-              python3 -m pip install -r requirements_dev.txt && \
               python3 -m pip install -r requirements_test.txt && \
               python3 -m pytest -p no:spark -m "not spark_test" && \
               deactivate'
